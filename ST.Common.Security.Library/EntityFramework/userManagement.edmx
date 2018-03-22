@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="usermanagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="profile">
+          <Key>
+            <PropertyRef Name="_id" />
+          </Key>
+          <Property Name="_id" Type="varchar" MaxLength="24" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Mobile" Type="varchar" MaxLength="15" />
+          <Property Name="FirstName" Type="varchar" MaxLength="256" />
+          <Property Name="LastName" Type="varchar" MaxLength="256" />
+          <Property Name="ProfileName" Type="varchar" MaxLength="512" />
+          <Property Name="ProfilePic" Type="varchar" MaxLength="1024" />
+          <Property Name="Location" Type="varchar" MaxLength="64" />
+          <Property Name="Live" Type="bit" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="AccountType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="token">
+          <Key>
+            <PropertyRef Name="_id" />
+          </Key>
+          <Property Name="_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="varchar" MaxLength="50" />
+          <Property Name="RefreshToken" Type="varchar" MaxLength="256" />
+          <Property Name="Sessiontoken" Type="varchar" MaxLength="256" />
+          <Property Name="UserAgent" Type="varchar" MaxLength="256" />
+          <Property Name="DeviceId" Type="varchar" MaxLength="256" />
+          <Property Name="IsMobile" Type="bit" />
+          <Property Name="Details" Type="varchar" MaxLength="1024" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="_id" />
+          </Key>
+          <Property Name="_id" Type="varchar" MaxLength="24" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="RegistrationIP" Type="varchar" MaxLength="50" />
+          <Property Name="RegistrationTime" Type="datetime" Nullable="false" />
+          <Property Name="EmailVerification" Type="varchar" MaxLength="256" />
+          <Property Name="PasswordHash" Type="varchar" MaxLength="512" />
+          <Property Name="Salt" Type="varchar" MaxLength="256" />
+          <Property Name="Mobile" Type="varchar" MaxLength="15" />
+          <Property Name="TempMobile" Type="varchar" MaxLength="15" />
+          <Property Name="MobileVerificationOTP" Type="varchar" MaxLength="10" />
+          <Property Name="GooglePlus" Type="varchar" MaxLength="30" />
+          <Property Name="FacebookID" Type="varchar" MaxLength="30" />
+          <Property Name="KeepMe" Type="varchar" MaxLength="256" />
+          <Property Name="RecoverType" Type="bit" />
+          <Property Name="RecoverHash" Type="varchar" MaxLength="256" />
+          <Property Name="RecoverTimeStamp" Type="datetime" />
+        </EntityType>
+        <Association Name="user__id_foreign">
+          <End Role="profile" Type="Self.profile" Multiplicity="1" />
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="profile">
+              <PropertyRef Name="_id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="usermanagementModelStoreContainer">
+          <EntitySet Name="profile" EntityType="Self.profile" Schema="usermanagement" store:Type="Tables" />
+          <EntitySet Name="token" EntityType="Self.token" Schema="usermanagement" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="usermanagement" store:Type="Tables" />
+          <AssociationSet Name="user__id_foreign" Association="Self.user__id_foreign">
+            <End Role="profile" EntitySet="profile" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="usermanagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="profile">
+          <Key>
+            <PropertyRef Name="C_id" />
+          </Key>
+          <Property Name="C_id" Type="String" MaxLength="24" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="ProfileName" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="ProfilePic" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Live" Type="Boolean" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="AccountType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="Self.user__id_foreign" FromRole="profile" ToRole="user" />
+        </EntityType>
+        <EntityType Name="token">
+          <Key>
+            <PropertyRef Name="C_id" />
+          </Key>
+          <Property Name="C_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RefreshToken" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Sessiontoken" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="UserAgent" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="DeviceId" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="IsMobile" Type="Boolean" />
+          <Property Name="Details" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="C_id" />
+          </Key>
+          <Property Name="C_id" Type="String" MaxLength="24" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RegistrationIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RegistrationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmailVerification" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="Salt" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="TempMobile" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="MobileVerificationOTP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="GooglePlus" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FacebookID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="KeepMe" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="RecoverType" Type="Boolean" />
+          <Property Name="RecoverHash" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="RecoverTimeStamp" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="profile" Relationship="Self.user__id_foreign" FromRole="user" ToRole="profile" />
+        </EntityType>
+        <Association Name="user__id_foreign">
+          <End Role="profile" Type="Self.profile" Multiplicity="1" />
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="profile">
+              <PropertyRef Name="C_id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="C_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="usermanagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="profiles" EntityType="Self.profile" />
+          <EntitySet Name="tokens" EntityType="Self.token" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="user__id_foreign" Association="Self.user__id_foreign">
+            <End Role="profile" EntitySet="profiles" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="usermanagementModelStoreContainer" CdmEntityContainer="usermanagementEntities">
+          <EntitySetMapping Name="profiles">
+            <EntityTypeMapping TypeName="usermanagementModel.profile">
+              <MappingFragment StoreEntitySet="profile">
+                <ScalarProperty Name="C_id" ColumnName="_id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="ProfileName" ColumnName="ProfileName" />
+                <ScalarProperty Name="ProfilePic" ColumnName="ProfilePic" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Live" ColumnName="Live" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tokens">
+            <EntityTypeMapping TypeName="usermanagementModel.token">
+              <MappingFragment StoreEntitySet="token">
+                <ScalarProperty Name="C_id" ColumnName="_id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="RefreshToken" ColumnName="RefreshToken" />
+                <ScalarProperty Name="Sessiontoken" ColumnName="Sessiontoken" />
+                <ScalarProperty Name="UserAgent" ColumnName="UserAgent" />
+                <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+                <ScalarProperty Name="IsMobile" ColumnName="IsMobile" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="usermanagementModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="C_id" ColumnName="_id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="RegistrationIP" ColumnName="RegistrationIP" />
+                <ScalarProperty Name="RegistrationTime" ColumnName="RegistrationTime" />
+                <ScalarProperty Name="EmailVerification" ColumnName="EmailVerification" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="TempMobile" ColumnName="TempMobile" />
+                <ScalarProperty Name="MobileVerificationOTP" ColumnName="MobileVerificationOTP" />
+                <ScalarProperty Name="GooglePlus" ColumnName="GooglePlus" />
+                <ScalarProperty Name="FacebookID" ColumnName="FacebookID" />
+                <ScalarProperty Name="KeepMe" ColumnName="KeepMe" />
+                <ScalarProperty Name="RecoverType" ColumnName="RecoverType" />
+                <ScalarProperty Name="RecoverHash" ColumnName="RecoverHash" />
+                <ScalarProperty Name="RecoverTimeStamp" ColumnName="RecoverTimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
