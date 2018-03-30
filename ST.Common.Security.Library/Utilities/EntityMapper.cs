@@ -24,7 +24,7 @@ namespace ST.Common.Security.Library.Utilities
                 MobileVerificationOTP= userDbModel.MobileVerificationOTP,
                 PasswordHash= userDbModel.PasswordHash,
                 RecoverHash= userDbModel.RecoverHash,
-                RecoverTimeStamp= userDbModel.RecoverTimeStamp.GetValueOrDefault(),
+                RecoverTimeStamp= userDbModel.RecoverTimeStamp,
                 RecoverType= userDbModel.RecoverType,
                 RegistrationIP= userDbModel.RegistrationIP,
                 RegistrationTime= userDbModel.RegistrationTime,

@@ -44,6 +44,11 @@ namespace ST.Common.Security.Library.Services.Implementation
             return _userRepository.GetByName(name);
         }
 
+        public User GetByVerifictionToken(string token)
+        {
+            return _userRepository.GetByVerifictionToken(token);
+        }
+
         public User Update(User profile)
         {
             return _userRepository.Update(profile);

@@ -18,6 +18,8 @@ namespace ST.Common.Security.Library.Repositories.Interfaces
         Token GetByRefreshToken(string refreshToken);
 
         Token Update(Token token);
-        
+
+        Token GetByToken(string token);
+
     }
 }

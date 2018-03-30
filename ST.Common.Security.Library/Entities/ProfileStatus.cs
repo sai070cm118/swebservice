@@ -15,10 +15,11 @@ namespace ST.Common.Security.Library.Entities
         CWFB,
         CWGPlus,
         PS,
-        ENVMNV,
         EVMNV,
         ENVMV,
-        EVMV
+        EVMV,
+        Locked,
+        Deactivated,
 
     }
 }

@@ -23,7 +23,7 @@ namespace ST.Common.Security.Library.Entities
         public string KeepMe { get; set; }
         public bool? RecoverType { get; set; }
         public string RecoverHash { get; set; }
-        public DateTime RecoverTimeStamp { get; set; }
+        public DateTime? RecoverTimeStamp { get; set; }
 
     }   
 }

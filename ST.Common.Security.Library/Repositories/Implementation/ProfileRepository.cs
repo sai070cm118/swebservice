@@ -136,24 +136,6 @@ namespace ST.Common.Security.Library.Repositories.Implementation
                 profileDbModel.ProfileName = profile.ProfileName != null ? profile.ProfileName : profileDbModel.ProfileName;
                 profileDbModel.ProfilePic = profile.ProfilePic != null ? profile.ProfilePic : profileDbModel.ProfilePic;
                 profileDbModel.Status = profile.Status != null ? (int)profile.Status.GetValueOrDefault() :profileDbModel.Status;
-                profileDbModel.user = new user()
-                {
-                    Email = profile.User.Email,
-                    EmailVerification = profile.User.EmailVerification,
-                    FacebookID = profile.User.FacebookID,
-                    GooglePlus = profile.User.GooglePlus,
-                    KeepMe = profile.User.KeepMe,
-                    Mobile = profile.User.Mobile,
-                    MobileVerificationOTP = profile.User.MobileVerificationOTP,
-                    PasswordHash = profile.User.PasswordHash,
-                    RecoverHash = profile.User.RecoverHash,
-                    RecoverTimeStamp = profile.User.RecoverTimeStamp,
-                    RecoverType = profile.User.RecoverType,
-                    RegistrationIP = profile.User.RegistrationIP,
-                    RegistrationTime = profile.User.RegistrationTime,
-                    Salt = profile.User.Salt,
-                    TempMobile = profile.User.TempMobile
-                };
             }
 
 

@@ -22,5 +22,6 @@ namespace ST.Common.Security.Library.Entities
         public int? AccountType { get; set; }
 
         public User User { get; set; }
+        public Token Token { get; set; }
     }
 }

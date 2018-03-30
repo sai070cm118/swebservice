@@ -21,5 +21,7 @@ namespace ST.Common.Security.Library.Services.Interfaces
 
         Token Update(Token token);
 
+        Token GetByToken(string token);
+
     }
 }

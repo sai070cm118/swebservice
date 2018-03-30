@@ -89,16 +89,29 @@ namespace ST.Common.Security.Library.Repositories.Implementation
             throw new NotImplementedException();
         }
 
+        public User GetByVerifictionToken(string token)
+        {
+            user user = _entityFramework.users.FirstOrDefault(x => x.EmailVerification == token);
+
+            if (user != null)
+                return user.ConvertToUser();
+
+            return null;
+        }
+
         public User Update(User user)
         {
             user userDbModel = _entityFramework.users.FirstOrDefault(x => x.C_id== user.Id);
 
             if (userDbModel != null)
             {
+                if(userDbModel.Email==null)
+                    userDbModel.Email= user.Email !=null ? user.Email : userDbModel.Email;
+
+                if (userDbModel.Mobile == null)
+                    userDbModel.Mobile = user.Mobile != null ? user.Mobile : userDbModel.Mobile;
 
                 userDbModel.KeepMe = user.KeepMe != null ? user.KeepMe : userDbModel.KeepMe;
-                userDbModel.RegistrationIP = user.RegistrationIP != null ? user.RegistrationIP : userDbModel.RegistrationIP;
-                userDbModel.RegistrationTime = user.RegistrationTime != null ? user.RegistrationTime : userDbModel.RegistrationTime;
 
                 userDbModel.PasswordHash = user.PasswordHash != null ? user.PasswordHash : userDbModel.PasswordHash;
                 userDbModel.Salt = user.Salt != null ? user.Salt : userDbModel.Salt;
@@ -110,7 +123,7 @@ namespace ST.Common.Security.Library.Repositories.Implementation
                 userDbModel.TempMobile = user.TempMobile != null ? user.TempMobile : userDbModel.TempMobile;
                 userDbModel.MobileVerificationOTP = user.MobileVerificationOTP != null ? user.MobileVerificationOTP : userDbModel.MobileVerificationOTP;
                 userDbModel.RecoverHash = user.RecoverHash != null ? user.RecoverHash : userDbModel.RecoverHash;
-                userDbModel.RecoverTimeStamp = user.RecoverTimeStamp != null ? user.RecoverTimeStamp : userDbModel.RecoverTimeStamp.GetValueOrDefault();
+                userDbModel.RecoverTimeStamp = user.RecoverTimeStamp != null ? user.RecoverTimeStamp : userDbModel.RecoverTimeStamp;
                 userDbModel.RecoverType = user.RecoverType != null ? user.RecoverType : userDbModel.RecoverType;
 
 

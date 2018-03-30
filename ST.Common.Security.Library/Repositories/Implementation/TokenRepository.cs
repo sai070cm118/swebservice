@@ -85,6 +85,16 @@ namespace ST.Common.Security.Library.Repositories.Implementation
             return null;
         }
 
+        public Token GetByToken(string token)
+        {
+            token userToken = _entityFramework.tokens.FirstOrDefault(x => x.Sessiontoken == token);
+
+            if (userToken != null)
+                return userToken.ConvertToToken();
+
+            return null;
+        }
+
         public Token GetByUserId(string id)
         {
             token token = _entityFramework.tokens.FirstOrDefault(x => x.userId == id);

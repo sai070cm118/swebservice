@@ -15,6 +15,8 @@ namespace ST.Common.Security.Library.Repositories.Interfaces
 
         User GetById(string id);
 
+        User GetByVerifictionToken(string token);
+
         User GetByEmailorMobile(string name);
 
         IList<User> GetByName(string name);

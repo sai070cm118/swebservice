@@ -35,6 +35,11 @@ namespace ST.Common.Security.Library.Services.Implementation
             return _tokenRepository.GetByRefreshToken(refreshToken);
         }
 
+        public Token GetByToken(string token)
+        {
+            return _tokenRepository.GetByToken(token);
+        }
+
         public Token GetByUserId(string id)
         {
             return _tokenRepository.GetByUserId(id);
